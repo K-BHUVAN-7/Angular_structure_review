@@ -1,0 +1,30 @@
+# This is a Semgrep rule file. It should be named with a .yml or .yaml extension for clarity,
+# for example, 'semgrep-rules.yml'. However, 'rules' will work with the CI config above.
+
+rules:
+  - id: angular-project-structure
+    languages: [typescript]
+    severity: ERROR
+    message: >
+      Files in 'src/app/' should be organized into 'core/', 'shared/', or 'features/' subdirectories.
+      This file is located directly under 'src/app/' and should be moved.
+      - Core services (like guards, interceptors) go in 'core/'.
+      - Reusable components, directives, and pipes go in 'shared/'.
+      - Feature-specific modules and components go in 'features/'.
+    metadata:
+      category: architecture
+      technology: angular
+    # This pattern looks for any file that is directly under src/app/
+    # instead of being in a subdirectory.
+    patterns:
+      - pattern: src/app/$FILENAME.$EXT
+    # We then exclude the standard app-level files and the correct folders.
+    paths:
+      exclude:
+        - src/app/core/**
+        - src/app/shared/**
+        - src/app/features/**
+        # Exclude essential files that are supposed to be at the app root
+        - src/app/app.module.ts
+        - src/app/app-routing.module.ts
+        - src/app/app.component.ts
