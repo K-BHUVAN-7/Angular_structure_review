@@ -24,7 +24,7 @@ jobs:
       # Step 2: Run the Semgrep Action
       - name: Run Semgrep Scan
         # This uses the general v2 tag, which is the final troubleshooting step
-        uses: semgrep/semgrep-action@v2
+        uses: semgrep/semgrep-action@v1
         with:
           # Point to the configuration file containing your custom rules
           config: 'rules'
