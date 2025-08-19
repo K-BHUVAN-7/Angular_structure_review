@@ -23,8 +23,8 @@ jobs:
 
       # Step 2: Run the Semgrep Action
       - name: Run Semgrep Scan
-        # This is the corrected line with a specific version
-        uses: semgrep/semgrep-action@v2.5.1
+        # This uses the general v2 tag, which is the final troubleshooting step
+        uses: semgrep/semgrep-action@v2
         with:
           # Point to the configuration file containing your custom rules
           config: 'rules'
