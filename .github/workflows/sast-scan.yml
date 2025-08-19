@@ -1,0 +1,30 @@
+# .github/workflows/sast-scan.yml
+
+name: SAST Scan with Semgrep
+
+# This workflow runs on pushes to the main branch and on pull requests
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  semgrep:
+    # The name of the job
+    name: Semgrep Scan
+    # Run on the latest version of Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out your repository's code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Run the Semgrep Action
+      # This action automatically scans your code using Semgrep
+      - name: Run Semgrep Scan
+        uses: semgrep/semgrep-action@v2
+        with:
+          # Point to the configuration file containing your custom rules
+          config: 'rules'
